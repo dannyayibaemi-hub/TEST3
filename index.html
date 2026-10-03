@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FUO 100 Level Test Driller</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">FUO<span>100</span></div>
+    <div>
+        <h1>100 Level Test Driller</h1>
+        <p>Federal University Otuoke</p>
+    </div>
+</header>
+
+<main>
+
+    <!-- HOME PAGE -->
+    <section id="homePage">
+
+        <div class="hero">
+            <div class="hero-icon">🎓</div>
+
+            <h2>FUO 100 Level Test Driller</h2>
+
+            <p>
+                Master MTH 101, PHY 101 and CHEM 101 through
+                topic practice and realistic timed examinations.
+            </p>
+        </div>
+
+        <div class="setup-card">
+
+            <h2>Start Your Practice</h2>
+
+            <label>Course</label>
+
+            <select id="course">
+                <option value="">Select Course</option>
+                <option value="MTH101">MTH 101 — Mathematics</option>
+                <option value="PHY101">PHY 101 — Physics</option>
+                <option value="CHEM101">CHEM 101 — Chemistry</option>
+            </select>
+
+
+            <label>Practice Type</label>
+
+            <select id="practiceType">
+
+                <option value="topic">
+                    Topic by Topic
+                </option>
+
+                <option value="random">
+                    Random Topics
+                </option>
+
+            </select>
+
+
+            <div id="topicBox">
+
+                <label>Topic</label>
+
+                <select id="topic">
+
+                    <option value="">
+                        Select a course first
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <label>Mode</label>
+
+            <select id="mode">
+
+                <option value="test">
+                    Test Mode
+                </option>
+
+                <option value="exam">
+                    Exam Mode
+                </option>
+
+            </select>
+
+
+            <label>Number of Questions</label>
+
+            <input
+                type="number"
+                id="questionCount"
+                value="20"
+                min="1"
+                max="150"
+            >
+
+            <small>
+                Maximum: 150 questions for a topic.
+            </small>
+
+
+            <label>Time</label>
+
+            <select id="timeLimit">
+
+                <option value="5">5 minutes</option>
+                <option value="10">10 minutes</option>
+                <option value="20" selected>20 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="45">45 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="90">1 hour 30 minutes</option>
+                <option value="120">2 hours</option>
+
+            </select>
+
+
+            <button id="startBtn">
+                🚀 Start Practice
+            </button>
+
+        </div>
+
+
+        <div class="performance-card">
+
+            <h2>📊 My Performance</h2>
+
+            <div class="stats">
+
+                <div>
+                    <strong id="testsTaken">0</strong>
+                    <span>Tests Taken</span>
+                </div>
+
+                <div>
+                    <strong id="averageScore">0%</strong>
+                    <span>Average</span>
+                </div>
+
+                <div>
+                    <strong id="bestScore">0%</strong>
+                    <span>Best Score</span>
+                </div>
+
+            </div>
+
+            <button
+                class="secondary-btn"
+                onclick="showHistory()"
+            >
+                View Performance History
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUIZ PAGE -->
+
+    <section id="quizPage" class="hidden">
+
+        <div class="quiz-header">
+
+            <div>
+                <span id="quizCourse"></span>
+                <h2 id="quizTopic"></h2>
+            </div>
+
+            <div class="timer">
+                ⏱️
+                <span id="timer">00:00</span>
+            </div>
+
+        </div>
+
+
+        <div class="progress-area">
+
+            <div>
+                Question
+                <strong id="questionNumber">1</strong>
+                of
+                <strong id="totalQuestions">20</strong>
+            </div>
+
+            <div class="progress">
+                <div id="progressBar"></div>
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div id="questionText"></div>
+
+            <div id="options"></div>
+
+        </div>
+
+
+        <div class="navigation">
+
+            <button
+                id="previousBtn"
+                class="secondary-btn"
+            >
+                ← Previous
+            </button>
+
+            <button
+                id="nextBtn"
+                class="primary-btn"
+            >
+                Next →
+            </button>
+
+            <button
+                id="submitBtn"
+                class="submit-btn hidden"
+            >
+                Submit Test
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT PAGE -->
+
+    <section id="resultPage" class="hidden">
+
+        <div class="result-card">
+
+            <div class="result-icon">
+                🎉
+            </div>
+
+            <h2>Practice Completed</h2>
+
+            <div class="score-circle">
+
+                <strong id="finalPercentage">
+                    0%
+                </strong>
+
+            </div>
+
+            <h3 id="finalScore">
+                0 / 0
+            </h3>
+
+            <p id="resultMessage"></p>
+
+            <div class="result-details">
+
+                <div>
+                    <span>Correct</span>
+                    <strong id="correctAnswers">0</strong>
+                </div>
+
+                <div>
+                    <span>Wrong</span>
+                    <strong id="wrongAnswers">0</strong>
+                </div>
+
+                <div>
+                    <span>Time Used</span>
+                    <strong id="timeUsed">0:00</strong>
+                </div>
+
+            </div>
+
+            <button
+                class="primary-btn"
+                onclick="showCorrections()"
+            >
+                📝 View Corrections
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="goHome()"
+            >
+                🏠 Back Home
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- CORRECTIONS -->
+
+    <section id="correctionPage" class="hidden">
+
+        <div class="correction-header">
+
+            <h2>📝 Corrections</h2>
+
+            <p>
+                Review every question and understand the correct answer.
+            </p>
+
+        </div>
+
+        <div id="correctionList"></div>
+
+        <button
+            class="primary-btn"
+            onclick="goHome()"
+        >
+            🏠 Back Home
+        </button>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section id="historyPage" class="hidden">
+
+        <div class="history-card">
+
+            <h2>📊 Performance History</h2>
+
+            <div id="historyList"></div>
+
+            <button
+                class="secondary-btn"
+                onclick="goHome()"
+            >
+                ← Back
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>FUO 100 Level Test Driller</p>
+    <p>For educational practice purposes</p>
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
